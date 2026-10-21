@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Checkout - HNDStore</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+    <style>
+
+        /* =========================================
+           E-WALLET CHECKOUT
+        ========================================= */
+
+        .ewallet-checkout-card {
+
+            padding: 22px;
+
+            margin-bottom: 24px;
+
+            border: 1px solid
+                rgba(255, 255, 255, 0.08);
+
+            border-radius: 18px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #1d1d23,
+                    #17171c
+                );
+        }
+
+
+        .ewallet-checkout-top {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .ewallet-checkout-icon {
+
+            width: 48px;
+            height: 48px;
+
+            flex-shrink: 0;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 14px;
+
+            background: #292930;
+
+            font-size: 23px;
+        }
+
+
+        .ewallet-checkout-name {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 4px;
+        }
+
+
+        .ewallet-checkout-name strong {
+
+            font-size: 17px;
+
+            color: #ffffff;
+        }
+
+
+        .ewallet-checkout-name span {
+
+            font-size: 12px;
+
+            color: #85858e;
+        }
+
+
+        .ewallet-checkout-row {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            padding: 11px 0;
+
+            font-size: 13px;
+        }
+
+
+        .ewallet-checkout-row span {
+
+            color: #8d8d96;
+        }
+
+
+        .ewallet-checkout-row strong {
+
+            color: #eeeeef;
+
+            text-align: right;
+        }
+
+
+        .ewallet-checkout-total {
+
+            margin-top: 8px;
+
+            padding-top: 17px;
+
+            border-top:
+                1px solid
+                rgba(255, 255, 255, 0.08);
+
+            margin-bottom: 0;
+        }
+
+
+        .ewallet-checkout-total span {
+
+            color: #ffffff;
+
+            font-weight: 700;
+        }
+
+
+        .ewallet-checkout-total strong {
+
+            font-size: 20px;
+
+            color: #ffffff;
+        }
+
+
+        .admin-note {
+
+            margin: 4px 0 0;
+
+            font-size: 11px;
+
+            line-height: 1.5;
+
+            color: #777780;
+
+            font-style: italic;
+        }
+
+
+        /* =========================================
+           E-WALLET PAYMENT INFO
+        ========================================= */
+
+        .ewallet-payment-info {
+
+            margin-bottom: 24px;
+
+            padding: 16px;
+
+            border-radius: 15px;
+
+            background:
+                rgba(255, 255, 255, 0.035);
+
+            border: 1px solid
+                rgba(255, 255, 255, 0.06);
+        }
+
+
+        .ewallet-payment-info strong {
+
+            display: block;
+
+            margin-bottom: 6px;
+
+            font-size: 13px;
+
+            color: #ffffff;
+        }
+
+
+        .ewallet-payment-info p {
+
+            margin: 0;
+
+            font-size: 12px;
+
+            line-height: 1.6;
+
+            color: #85858e;
+        }
+
+
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media (max-width: 480px) {
+
+            .ewallet-checkout-card {
+
+                padding: 18px;
+            }
+
+
+            .ewallet-checkout-row {
+
+                font-size: 12px;
+            }
+
+
+            .ewallet-checkout-total strong {
+
+                font-size: 18px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+<!-- =========================================
+     NAVBAR
+========================================== -->
+
+<header class="navbar">
+
+    <div class="logo">
+
+        HND<span>Store</span>
+
+    </div>
+
+
+    <nav>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="ml.html">
+            Mobile Legends
+        </a>
+
+    </nav>
+
+
+    <button
+        class="cart-button"
+        type="button"
+    >
+
+        🛒
+
+    </button>
+
+</header>
+
+
+
+<main>
+
+
+    <section class="checkout-section">
+
+
+        <div class="checkout-box">
+
+
+            <!-- =================================
+                 TITLE
+            ================================== -->
+
+            <div class="section-title">
+
+                <p
+                    class="eyebrow"
+                    id="checkoutEyebrow"
+                >
+
+                    CHECKOUT
+
+                </p>
+
+
+                <h2 id="checkoutTitle">
+
+                    Detail Pesanan
+
+                </h2>
+
+            </div>
+
+
+
+            <div id="checkoutContent">
+
+
+                <!-- =================================
+                     GAME PRODUCT
+                ================================== -->
+
+                <div
+                    class="checkout-product"
+                    id="gameProduct"
+                >
+
+                    <span class="checkout-label">
+
+                        PRODUK
+
+                    </span>
+
+
+                    <h3 id="productName">
+
+                        -
+
+                    </h3>
+
+
+                    <div
+                        class="checkout-price"
+                        id="productPrice"
+                    >
+
+                        -
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================
+                     E-WALLET PRODUCT
+                ================================== -->
+
+                <div
+                    class="ewallet-checkout-card"
+                    id="ewalletProduct"
+                    style="display: none;"
+                >
+
+
+                    <div class="ewallet-checkout-top">
+
+
+                        <div
+                            class="ewallet-checkout-icon"
+                            id="ewalletIcon"
+                        >
+
+                            💳
+
+                        </div>
+
+
+                        <div
+                            class="ewallet-checkout-name"
+                        >
+
+                            <strong
+                                id="ewalletName"
+                            >
+
+                                E-Wallet
+
+                            </strong>
+
+
+                            <span>
+
+                                Top Up Saldo
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div
+                        class="ewallet-checkout-row"
+                    >
+
+                        <span>
+
+                            Nomor Tujuan
+
+                        </span>
+
+
+                        <strong
+                            id="ewalletNumber"
+                        >
+
+                            -
+
+                        </strong>
+
+                    </div>
+
+
+
+                    <div
+                        class="ewallet-checkout-row"
+                    >
+
+                        <span>
+
+                            Saldo
+
+                        </span>
+
+
+                        <strong
+                            id="ewalletBalance"
+                        >
+
+                            Rp0
+
+                        </strong>
+
+                    </div>
+
+
+
+                    <div
+                        class="ewallet-checkout-row"
+                    >
+
+                        <div>
+
+                            <span>
+
+                                Biaya Admin
+
+                            </span>
+
+
+                            <p
+                                class="admin-note"
+                            >
+
+                                *Harga admin dapat berubah.
+                                Pastikan konfirmasi ke admin
+                                sebelum pembayaran.
+
+                            </p>
+
+                        </div>
+
+
+                        <strong
+                            id="ewalletAdmin"
+                        >
+
+                            Rp3.000
+
+                        </strong>
+
+                    </div>
+
+
+
+                    <div
+                        class="
+                            ewallet-checkout-row
+                            ewallet-checkout-total
+                        "
+                    >
+
+                        <span>
+
+                            Total Bayar
+
+                        </span>
+
+
+                        <strong
+                            id="ewalletTotal"
+                        >
+
+                            Rp3.000
+
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- =================================
+                     DIVIDER
+                ================================== -->
+
+                <div
+                    class="checkout-divider"
+                    id="gameDivider"
+                ></div>
+
+
+
+                <!-- =================================
+                     GAME INFO
+                ================================== -->
+
+                <div
+                    class="checkout-info"
+                    id="gameInfo"
+                >
+
+
+                    <div class="info-row">
+
+                        <span>
+                            User ID
+                        </span>
+
+
+                        <strong id="userId">
+
+                            -
+
+                        </strong>
+
+                    </div>
+
+
+
+                    <div
+                        class="info-row"
+                        id="zoneRow"
+                    >
+
+                        <span>
+                            Zone ID
+                        </span>
+
+
+                        <strong id="zoneId">
+
+                            -
+
+                        </strong>
+
+                    </div>
+
+
+
+                    <div
+                        class="info-row"
+                        id="emailRow"
+                    >
+
+                        <span>
+                            Email
+                        </span>
+
+
+                        <strong id="email">
+
+                            -
+
+                        </strong>
+
+                    </div>
+
+
+
+                    <div class="info-row">
+
+                        <span>
+                            No. HP
+                        </span>
+
+
+                        <strong id="phone">
+
+                            -
+
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div
+                    class="checkout-divider"
+                    id="gameDivider2"
+                ></div>
+
+
+
+                <!-- =================================
+                     E-WALLET INFO
+                ================================== -->
+
+                <div
+                    class="ewallet-payment-info"
+                    id="ewalletPaymentInfo"
+                    style="display: none;"
+                >
+
+                    <strong>
+
+                        💵 Pembayaran Cash
+
+                    </strong>
+
+
+                    <p>
+
+                        Pembayaran dilakukan secara cash
+                        kepada admin HNDStore. Setelah
+                        melakukan pembayaran, lanjutkan
+                        ke halaman pembayaran.
+
+                    </p>
+
+                </div>
+
+
+
+                <!-- =================================
+                     PAYMENT METHOD
+                ================================== -->
+
+                <div class="payment-section">
+
+
+                    <span class="checkout-label">
+
+                        METODE PEMBAYARAN
+
+                    </span>
+
+
+
+                    <div class="payment-options">
+
+
+                        <!-- QRIS -->
+
+                        <button
+                            class="payment-option"
+                            type="button"
+                            data-payment="QRIS"
+                            id="qrisOption"
+                        >
+
+                            <span>
+
+                                📱
+
+                            </span>
+
+
+                            <div>
+
+                                <strong>
+
+                                    QRIS
+
+                                </strong>
+
+
+                                <small>
+
+                                    Scan & bayar
+
+                                </small>
+
+                            </div>
+
+                        </button>
+
+
+
+                        <!-- E-WALLET -->
+
+                        <button
+                            class="payment-option"
+                            type="button"
+                            data-payment="E-Wallet"
+                            id="ewalletPaymentOption"
+                        >
+
+                            <span>
+
+                                💳
+
+                            </span>
+
+
+                            <div>
+
+                                <strong>
+
+                                    E-Wallet
+
+                                </strong>
+
+
+                                <small>
+
+                                    Pembayaran digital
+
+                                </small>
+
+                            </div>
+
+                        </button>
+
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================
+                     CONTINUE
+                ================================== -->
+
+                <button
+                    class="pay-button"
+                    id="continuePayment"
+                    type="button"
+                >
+
+                    Lanjut ke Pembayaran →
+
+                </button>
+
+
+            </div>
+
+
+
+            <!-- =================================
+                 EMPTY
+            ================================== -->
+
+            <div
+                class="empty-checkout"
+                id="emptyCheckout"
+                style="display: none;"
+            >
+
+                <h3>
+
+                    Pesanan tidak ditemukan
+
+                </h3>
+
+
+                <p>
+
+                    Silakan kembali ke halaman
+                    produk dan pilih produk terlebih dahulu.
+
+                </p>
+
+
+                <a
+                    href="ml.html"
+                    class="button"
+                >
+
+                    Kembali ke Produk
+
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+</main>
+
+
+
+<footer>
+
+    <p>
+
+        © 2026 HNDStore. All rights reserved.
+
+    </p>
+
+</footer>
+
+
+
+<!-- =========================================
+     WARNING MODAL
+========================================== -->
+
+<div
+    class="payment-modal"
+    id="warningModal"
+>
+
+    <div class="payment-modal-box">
+
+
+        <div class="success-icon">
+
+            !
+
+        </div>
+
+
+        <h2>
+
+            Pilih Pembayaran
+
+        </h2>
+
+
+        <p class="payment-modal-text">
+
+            Silakan pilih metode pembayaran
+            terlebih dahulu sebelum melanjutkan.
+
+        </p>
+
+
+        <button
+            class="pay-button"
+            id="closeWarning"
+            type="button"
+        >
+
+            Mengerti
+
+        </button>
+
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        const savedData =
+            localStorage.getItem(
+                "hndCheckout"
+            );
+
+
+        const content =
+            document.getElementById(
+                "checkoutContent"
+            );
+
+
+        const empty =
+            document.getElementById(
+                "emptyCheckout"
+            );
+
+
+        if (!savedData) {
+
+            content.style.display =
+                "none";
+
+            empty.style.display =
+                "block";
+
+            return;
+
+        }
+
+
+        let data;
+
+
+        try {
+
+            data =
+                JSON.parse(
+                    savedData
+                );
+
+        }
+
+        catch (error) {
+
+            content.style.display =
+                "none";
+
+            empty.style.display =
+                "block";
+
+            return;
+
+        }
+
+
+        const gameProduct =
+            document.getElementById(
+                "gameProduct"
+            );
+
+
+        const gameInfo =
+            document.getElementById(
+                "gameInfo"
+            );
+
+
+        const gameDivider =
+            document.getElementById(
+                "gameDivider"
+            );
+
+
+        const gameDivider2 =
+            document.getElementById(
+                "gameDivider2"
+            );
+
+
+        const ewalletProduct =
+            document.getElementById(
+                "ewalletProduct"
+            );
+
+
+        const ewalletPaymentInfo =
+            document.getElementById(
+                "ewalletPaymentInfo"
+            );
+
+
+        const checkoutEyebrow =
+            document.getElementById(
+                "checkoutEyebrow"
+            );
+
+
+        const checkoutTitle =
+            document.getElementById(
+                "checkoutTitle"
+            );
+
+
+        const qrisOption =
+            document.getElementById(
+                "qrisOption"
+            );
+
+
+        const ewalletPaymentOption =
+            document.getElementById(
+                "ewalletPaymentOption"
+            );
+
+
+        /*
+         * =====================================
+         * E-WALLET
+         * =====================================
+         */
+
+        if (
+            data.type === "ewallet"
+        ) {
+
+            checkoutEyebrow.textContent =
+                "TOP UP E-WALLET";
+
+
+            checkoutTitle.textContent =
+                "Konfirmasi Pesanan";
+
+
+            gameProduct.style.display =
+                "none";
+
+
+            gameInfo.style.display =
+                "none";
+
+
+            gameDivider.style.display =
+                "none";
+
+
+            gameDivider2.style.display =
+                "none";
+
+
+            ewalletProduct.style.display =
+                "block";
+
+
+            ewalletPaymentInfo.style.display =
+                "block";
+
+
+            document.getElementById(
+                "ewalletName"
+            ).textContent =
+                data.wallet ||
+                "E-Wallet";
+
+
+            document.getElementById(
+                "ewalletNumber"
+            ).textContent =
+                data.number ||
+                "-";
+
+
+            const balance =
+                Number(
+                    data.amount
+                ) || 0;
+
+
+            const admin =
+                Number(
+                    data.admin
+                ) || 3000;
+
+
+            const total =
+                Number(
+                    data.total
+                ) ||
+                balance + admin;
+
+
+            document.getElementById(
+                "ewalletBalance"
+            ).textContent =
+                "Rp" +
+                new Intl.NumberFormat(
+                    "id-ID"
+                ).format(
+                    balance
+                );
+
+
+            document.getElementById(
+                "ewalletAdmin"
+            ).textContent =
+                "Rp" +
+                new Intl.NumberFormat(
+                    "id-ID"
+                ).format(
+                    admin
+                );
+
+
+            document.getElementById(
+                "ewalletTotal"
+            ).textContent =
+                "Rp" +
+                new Intl.NumberFormat(
+                    "id-ID"
+                ).format(
+                    total
+                );
+
+
+            if (
+                data.wallet === "DANA"
+            ) {
+
+                document.getElementById(
+                    "ewalletIcon"
+                ).textContent =
+                    "💙";
+
+            }
+
+            else if (
+                data.wallet === "OVO"
+            ) {
+
+                document.getElementById(
+                    "ewalletIcon"
+                ).textContent =
+                    "🟣";
+
+            }
+
+            else if (
+                data.wallet === "GoPay"
+            ) {
+
+                document.getElementById(
+                    "ewalletIcon"
+                ).textContent =
+                    "🟢";
+
+            }
+
+
+            /*
+             * E-Wallet hanya menggunakan
+             * metode E-Wallet.
+             */
+
+            qrisOption.style.display =
+                "none";
+
+
+            ewalletPaymentOption.style.display =
+                "flex";
+
+        }
+
+
+        /*
+         * =====================================
+         * GAME
+         * =====================================
+         */
+
+        else {
+
+            document.getElementById(
+                "productName"
+            ).textContent =
+                data.product ||
+                "-";
+
+
+            document.getElementById(
+                "productPrice"
+            ).textContent =
+                data.price ||
+                "-";
+
+
+            document.getElementById(
+                "userId"
+            ).textContent =
+                data.userId ||
+                "-";
+
+
+            document.getElementById(
+                "zoneId"
+            ).textContent =
+                data.zoneId ||
+                "-";
+
+
+            document.getElementById(
+                "email"
+            ).textContent =
+                data.email ||
+                "-";
+
+
+            document.getElementById(
+                "phone"
+            ).textContent =
+                data.phoneInternational ||
+                data.phone ||
+                "-";
+
+
+            if (
+                data.game ===
+                "Free Fire"
+            ) {
+
+                document.getElementById(
+                    "zoneRow"
+                ).style.display =
+                    "none";
+
+
+                document.getElementById(
+                    "emailRow"
+                ).style.display =
+                    "none";
+
+            }
+
+        }
+
+
+        /*
+         * =====================================
+         * PAYMENT
+         * =====================================
+         */
+
+        const paymentOptions =
+            document.querySelectorAll(
+                ".payment-option"
+            );
+
+
+        const warningModal =
+            document.getElementById(
+                "warningModal"
+            );
+
+
+        const closeWarning =
+            document.getElementById(
+                "closeWarning"
+            );
+
+
+        const continuePayment =
+            document.getElementById(
+                "continuePayment"
+            );
+
+
+        let selectedPayment = "";
+
+
+        /*
+         * Untuk E-Wallet, otomatis pilih
+         * E-Wallet karena hanya itu pilihan.
+         */
+
+        if (
+            data.type === "ewallet"
+        ) {
+
+            selectedPayment =
+                "E-Wallet";
+
+            ewalletPaymentOption.classList.add(
+                "selected"
+            );
+
+        }
+
+
+        paymentOptions.forEach(
+            function(option) {
+
+                option.addEventListener(
+                    "click",
+                    function() {
+
+                        paymentOptions.forEach(
+                            function(item) {
+
+                                item.classList.remove(
+                                    "selected"
+                                );
+
+                            }
+                        );
+
+
+                        option.classList.add(
+                            "selected"
+                        );
+
+
+                        selectedPayment =
+                            option.dataset.payment;
+
+                    }
+                );
+
+            }
+        );
+
+
+        closeWarning.addEventListener(
+            "click",
+            function() {
+
+                warningModal.classList.remove(
+                    "show"
+                );
+
+            }
+        );
+
+
+        warningModal.addEventListener(
+            "click",
+            function(event) {
+
+                if (
+                    event.target ===
+                    warningModal
+                ) {
+
+                    warningModal.classList.remove(
+                        "show"
+                    );
+
+                }
+
+            }
+        );
+
+
+        continuePayment.addEventListener(
+            "click",
+            function() {
+
+                if (
+                    selectedPayment === ""
+                ) {
+
+                    warningModal.classList.add(
+                        "show"
+                    );
+
+                    return;
+
+                }
+
+
+                localStorage.setItem(
+                    "hndPaymentMethod",
+                    selectedPayment
+                );
+
+
+                window.location.href =
+                    "payment.html";
+
+            }
+        );
+
+    }
+);
+
+</script>
+
+</body>
+</html>

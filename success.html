@@ -1,0 +1,367 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesanan Berhasil - HNDStore</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo">HND<span>Store</span></div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="ml.html">Produk</a>
+        </nav>
+        <a href="index.html" class="cart-button" aria-label="Kembali ke Home">🛒</a>
+    </header>
+
+    <main>
+        <section class="checkout-section">
+            <div class="checkout-box">
+                <div class="section-title">
+                    <p class="eyebrow">PESANAN DIBUAT</p>
+                    <h2>Pesanan Berhasil Dibuat</h2>
+                    <p>Terima kasih sudah memesan di HNDStore.</p>
+                </div>
+
+                <div class="receipt-success">
+                    <div class="receipt-icon">✓</div>
+                    <h3>Menunggu Verifikasi</h3>
+                    <p>Pesanan tercatat di perangkat ini. Pembayaran belum otomatis terverifikasi.</p>
+                </div>
+
+                <div class="receipt-box">
+                    <div class="receipt-invoice">
+                        <span>Invoice</span>
+                        <strong id="invoice">Memuat...</strong>
+                    </div>
+
+                    <div class="receipt-info">
+                        <div class="receipt-row" id="productRow">
+                            <span>Produk</span>
+                            <strong id="product">-</strong>
+                        </div>
+                        <div class="receipt-row" id="gameIdRow">
+                            <span>ID Game</span>
+                            <strong id="userId">-</strong>
+                        </div>
+                        <div class="receipt-row" id="zoneRow">
+                            <span>Zone ID</span>
+                            <strong id="zoneId">-</strong>
+                        </div>
+                        <div class="receipt-row" id="emailRow">
+                            <span>Email</span>
+                            <strong id="email">-</strong>
+                        </div>
+                        <div class="receipt-row" id="phoneRow">
+                            <span>Nomor HP</span>
+                            <strong id="phone">-</strong>
+                        </div>
+                        <div class="receipt-row" id="walletRow" hidden>
+                            <span>E-Wallet</span>
+                            <strong id="wallet">-</strong>
+                        </div>
+                        <div class="receipt-row">
+                            <span>Pembayaran</span>
+                            <strong id="payment">-</strong>
+                        </div>
+                        <div class="receipt-row">
+                            <span>Harga</span>
+                            <strong id="price">-</strong>
+                        </div>
+                        <div class="receipt-row">
+                            <span>Waktu</span>
+                            <strong id="time">-</strong>
+                        </div>
+                        <div class="receipt-row">
+                            <span>Status</span>
+                            <strong id="status">Menunggu Verifikasi</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="payment-note">
+                    <strong>⚠️ Penting</strong>
+                    <p>Kirim detail invoice ke WhatsApp admin setelah mengikuti instruksi pembayaran. Simpan nomor invoice untuk mengecek pesanan.</p>
+                </div>
+
+                <div class="receipt-actions">
+                    <button class="pay-button" id="whatsappButton" type="button">
+                        📲 Kirim Invoice via WhatsApp
+                    </button>
+                    <button class="pay-button" id="copyReceipt" type="button">
+                        📋 Salin Detail Pesanan
+                    </button>
+                    <a href="index.html" class="receipt-home">
+                        ← Kembali ke Home
+                    </a>
+                </div>
+
+                <p class="payment-message" id="actionMessage" role="status" aria-live="polite"></p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 HNDStore. All rights reserved.</p>
+    </footer>
+
+<script>
+// @ts-nocheck
+"use strict";
+
+document.addEventListener("DOMContentLoaded", function () {
+    const CHECKOUT_KEY = "hndCheckout";
+    const HISTORY_KEY = "hndHistory";
+    const PAYMENT_KEY = "hndPaymentMethod";
+    const WHATSAPP_NUMBER = "6285697213657";
+
+    const $ = id => document.getElementById(id);
+
+    function readJSON(key, fallback) {
+        try {
+            const value = localStorage.getItem(key);
+            return value ? JSON.parse(value) : fallback;
+        } catch {
+            return fallback;
+        }
+    }
+
+    function saveJSON(key, value) {
+        try {
+            localStorage.setItem(key, JSON.stringify(value));
+            return true;
+        } catch {
+            return false;
+        }
+    }
+
+    function text(value) {
+        return value === null || value === undefined ||
+            String(value).trim() === "" ? "-" : String(value);
+    }
+
+    function hideRow(id, value) {
+        $(id).hidden = value === null || value === undefined ||
+            String(value).trim() === "";
+    }
+
+    function rupiah(value) {
+        if (value === null || value === undefined || value === "") {
+            return "-";
+        }
+
+        if (typeof value === "string" &&
+            /rp|idr/i.test(value)) {
+            return value;
+        }
+
+        const amount = Number(String(value).replace(/[^\d.-]/g, ""));
+        if (!Number.isFinite(amount)) return String(value);
+
+        return "Rp" + amount.toLocaleString("id-ID");
+    }
+
+    function showMessage(message) {
+        $("actionMessage").textContent = message;
+    }
+
+    const data = readJSON(CHECKOUT_KEY, null);
+
+    if (!data || typeof data !== "object" || Array.isArray(data)) {
+        $("invoice").textContent = "Tidak tersedia";
+        showMessage("Data pesanan tidak ditemukan. Silakan lakukan checkout kembali.");
+        $("whatsappButton").disabled = true;
+        $("copyReceipt").disabled = true;
+        return;
+    }
+
+    const payment = localStorage.getItem(PAYMENT_KEY) ||
+        data.wallet || "-";
+
+    const now = new Date();
+    let transactionDate = data.createdAt
+        ? new Date(data.createdAt)
+        : now;
+
+    if (Number.isNaN(transactionDate.getTime())) {
+        transactionDate = now;
+    }
+
+    if (!data.createdAt) {
+        data.createdAt = transactionDate.toISOString();
+    }
+
+    // Gunakan invoice yang sudah ada supaya tidak berubah saat refresh.
+    let invoice = data.invoice || data.invoiceNumber;
+
+    if (!invoice) {
+        const year = transactionDate.getFullYear();
+        const month = String(transactionDate.getMonth() + 1).padStart(2, "0");
+        const key = "hndInvoiceSequence_" + year + "_" + month;
+        let sequence = Number(localStorage.getItem(key)) || 0;
+        sequence += 1;
+
+        invoice = "HND-" + year + month + "-" +
+            String(sequence).padStart(4, "0");
+
+        try {
+            localStorage.setItem(key, String(sequence));
+        } catch {
+            showMessage("Penyimpanan invoice tidak tersedia.");
+            $("whatsappButton").disabled = true;
+            $("copyReceipt").disabled = true;
+            return;
+        }
+    }
+
+    // Simpan kedua nama properti untuk kompatibilitas dengan kode lama.
+    data.invoice = invoice;
+    data.invoiceNumber = invoice;
+
+    if (!saveJSON(CHECKOUT_KEY, data)) {
+        showMessage("Invoice gagal disimpan. Periksa penyimpanan browser.");
+        $("whatsappButton").disabled = true;
+        $("copyReceipt").disabled = true;
+        return;
+    }
+
+    const isWallet = data.type === "ewallet";
+    const product = text(data.product || data.name ||
+        (isWallet ? "Top Up E-Wallet" : "-"));
+    const userId = text(data.userId);
+    const zoneId = text(data.zoneId);
+    const email = text(data.email);
+    const phone = text(data.phoneInternational || data.phone);
+    const wallet = text(data.wallet);
+    const amount = data.amount ?? data.price ?? data.total;
+    const price = rupiah(isWallet ? (data.total ?? amount) : data.price);
+    const dateText = transactionDate.toLocaleString("id-ID", {
+        weekday: "long",
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
+    });
+
+    $("invoice").textContent = invoice;
+    $("product").textContent = product;
+    $("userId").textContent = userId;
+    $("zoneId").textContent = zoneId;
+    $("email").textContent = email;
+    $("phone").textContent = phone;
+    $("wallet").textContent = wallet;
+    $("payment").textContent = text(payment);
+    $("price").textContent = price;
+    $("time").textContent = dateText;
+    $("status").textContent = "Menunggu Verifikasi";
+
+    hideRow("gameIdRow", data.userId);
+    hideRow("zoneRow", data.zoneId);
+    hideRow("emailRow", data.email);
+    hideRow("phoneRow", data.phoneInternational || data.phone);
+    $("walletRow").hidden = !isWallet;
+
+    // Format bersama untuk riwayat pesanan.
+    const order = {
+        type: data.type || "game",
+        invoice: invoice,
+        invoiceNumber: invoice,
+        product: product,
+        game: text(data.game),
+        userId: data.userId || "",
+        zoneId: data.zoneId || "",
+        email: data.email || "",
+        phone: data.phoneInternational || data.phone || "",
+        payment: payment,
+        wallet: data.wallet || "",
+        number: data.number || "",
+        amount: data.amount ?? "",
+        admin: data.admin ?? "",
+        total: data.total ?? data.price ?? "",
+        price: data.price ?? data.total ?? "",
+        createdAt: data.createdAt,
+        time: dateText,
+        status: "Menunggu Verifikasi"
+    };
+
+    const storedHistory = readJSON(HISTORY_KEY, []);
+    const history = Array.isArray(storedHistory) ? storedHistory : [];
+    const existingIndex = history.findIndex(item =>
+        item && (item.invoice === invoice ||
+            item.invoiceNumber === invoice)
+    );
+
+    if (existingIndex === -1) {
+        history.unshift(order);
+    } else {
+        // Jangan timpa status yang mungkin sudah diperbarui.
+        history[existingIndex] = {
+            ...order,
+            ...history[existingIndex],
+            invoice: invoice,
+            invoiceNumber: invoice
+        };
+    }
+
+    if (!saveJSON(HISTORY_KEY, history)) {
+        showMessage("Invoice tampil, tetapi riwayat gagal disimpan di perangkat ini.");
+    }
+
+    const receiptText = [
+        "*PESANAN HNDSTORE*",
+        "",
+        "🧾 Invoice: " + invoice,
+        "📦 Produk: " + product,
+        ...(isWallet ? ["👛 E-Wallet: " + wallet] : []),
+        ...(data.userId ? ["🎮 ID Game: " + userId] : []),
+        ...(data.zoneId ? ["🔐 Zone ID: " + zoneId] : []),
+        ...(data.email ? ["📧 Email: " + email] : []),
+        ...(data.phoneInternational || data.phone ? ["📱 Nomor HP: " + phone] : []),
+        "💳 Pembayaran: " + text(payment),
+        "💰 Total: " + price,
+        "⏰ Waktu: " + dateText,
+        "📌 Status: Menunggu Verifikasi",
+        "",
+        "Mohon bantu cek pesanan saya. Terima kasih."
+    ].join("\n");
+
+    $("whatsappButton").addEventListener("click", function () {
+        const url = "https://wa.me/" + WHATSAPP_NUMBER +
+            "?text=" + encodeURIComponent(receiptText);
+        window.location.href = url;
+    });
+
+    $("copyReceipt").addEventListener("click", async function () {
+        try {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                await navigator.clipboard.writeText(receiptText);
+            } else {
+                const area = document.createElement("textarea");
+                area.value = receiptText;
+                area.style.position = "fixed";
+                area.style.opacity = "0";
+                document.body.appendChild(area);
+                area.select();
+
+                const copied = document.execCommand("copy");
+                area.remove();
+
+                if (!copied) throw new Error("Copy gagal");
+            }
+
+            showMessage("Detail pesanan berhasil disalin! ✅");
+        } catch {
+            showMessage("Gagal menyalin otomatis. Silakan coba lagi.");
+        }
+    });
+
+    console.log("HNDStore invoice:", invoice);
+    console.log("HNDStore history:", readJSON(HISTORY_KEY, []));
+});
+</script>
+</body>
+</html>

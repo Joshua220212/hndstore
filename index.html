@@ -1,0 +1,352 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#070b12">
+  <meta name="description" content="HNDStore - Top up game dan E-Wallet.">
+  <title>HNDStore - Top Up Game</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+<header class="navbar">
+  <a class="logo" href="#home" aria-label="HNDStore Beranda">HND<span>Store</span></a>
+
+  <nav class="desktop-nav" aria-label="Navigasi utama">
+    <a href="#home">Home</a>
+    <a href="#produk">Produk</a>
+    <a href="#ewallet">E-Wallet</a>
+    <a href="#tentang">Tentang</a>
+  </nav>
+
+  <div class="nav-actions">
+    <button class="cart-button" id="cartButton" type="button" aria-label="Riwayat transaksi" title="Riwayat transaksi">🛒</button>
+    <button class="hamburger" id="menuToggle" type="button" aria-label="Buka menu" aria-expanded="false" aria-controls="menuPanel">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="menu-backdrop" id="menuBackdrop"></div>
+<aside class="menu-panel" id="menuPanel" aria-label="Menu navigasi" aria-hidden="true">
+  <div class="menu-heading">
+    <div>
+      <p class="eyebrow">NAVIGASI</p>
+      <h2>Menu HNDStore</h2>
+    </div>
+    <button type="button" id="menuClose" class="menu-close" aria-label="Tutup menu">×</button>
+  </div>
+
+  <a class="menu-link" href="#home"><span>🏠</span><span><strong>Beranda</strong><small>Halaman utama</small></span></a>
+  <a class="menu-link" href="#produk"><span>🎮</span><span><strong>Produk / Top Up</strong><small>Mobile Legends dan Free Fire</small></span></a>
+  <a class="menu-link" href="#cek-pesanan"><span>🧾</span><span><strong>Cek Pesanan</strong><small>Cari invoice lokal</small></span></a>
+  <a class="menu-link" href="#promo"><span>🎁</span><span><strong>Promo & Diskon</strong><small>Info promo</small></span></a>
+  <a class="menu-link" href="#riwayat"><span>🕘</span><span><strong>Riwayat Transaksi</strong><small>Transaksi di perangkat ini</small></span></a>
+  <a class="menu-link" href="#ewallet"><span>💳</span><span><strong>E-Wallet</strong><small>DANA, OVO, dan GoPay</small></span></a>
+  <a class="menu-link" href="#faq"><span>💬</span><span><strong>Pusat Bantuan / FAQ</strong><small>Jawaban pertanyaan umum</small></span></a>
+  <a class="menu-link" href="#tentang"><span>ℹ️</span><span><strong>Tentang HNDStore</strong><small>Informasi toko</small></span></a>
+  <a class="menu-link" href="#legal"><span>📋</span><span><strong>Syarat & Privasi</strong><small>Ketentuan dan kebijakan</small></span></a>
+
+  <p class="menu-footnote">HNDStore · Top up game dan E-Wallet</p>
+</aside>
+
+<main>
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <p class="eyebrow">TOP UP GAME TERPERCAYA</p>
+      <h1>Top Up Game <span>Cepat & Aman.</span></h1>
+      <p class="hero-description">Isi ulang kebutuhan gaming kamu dengan proses yang jelas, harga bersahabat, dan pelayanan terbaik.</p>
+      <div class="hero-actions">
+        <a href="#produk" class="button">Lihat Produk →</a>
+        <a href="#ewallet" class="button button-secondary">Top Up E-Wallet</a>
+      </div>
+      <div class="hero-tags">
+        <span>🎮 Produk game</span>
+        <span>💳 Pilihan E-Wallet</span>
+        <span>🔒 Data pesanan</span>
+      </div>
+    </div>
+    <div class="hero-decoration" aria-hidden="true">
+      <div class="hero-orb">HND<span>+</span></div>
+      <div class="floating-chip chip-one">⚡ Fast</div>
+      <div class="floating-chip chip-two">🎮 Gaming</div>
+    </div>
+  </section>
+
+  <section class="products section" id="produk">
+    <div class="section-title">
+      <p class="eyebrow">PILIH GAME</p>
+      <h2>Produk Populer</h2>
+      <p>Pilih game untuk melihat pilihan top up yang tersedia.</p>
+    </div>
+
+    <div class="product-grid">
+      <article class="product-card">
+        <div class="product-icon">💎</div>
+        <h3>Mobile Legends</h3>
+        <p>Diamond dan Weekly Diamond Pass.</p>
+        <a href="ml.html" class="product-button">Lihat Produk →</a>
+      </article>
+
+      <article class="product-card">
+        <div class="product-icon">🔥</div>
+        <h3>Free Fire</h3>
+        <p>Diamond dan membership.</p>
+        <a href="ff.html" class="product-button">Lihat Produk →</a>
+      </article>
+
+      <article class="product-card">
+        <div class="product-icon">🎮</div>
+        <h3>Roblox</h3>
+        <p>Robux dan kebutuhan Roblox.</p>
+        <span class="status-pill">Segera Hadir</span>
+      </article>
+    </div>
+  </section>
+
+  <section class="products section" id="ewallet">
+    <div class="section-title">
+      <p class="eyebrow">TOP UP SALDO</p>
+      <h2>E-Wallet</h2>
+      <p>Pilih dompet digital dan nominal saldo yang kamu inginkan.</p>
+    </div>
+
+    <div class="product-grid">
+      <article class="product-card wallet-card">
+        <div class="product-icon">💙</div>
+        <h3>DANA</h3>
+        <p>Top up saldo DANA.</p>
+        <button class="product-button ewallet-button" type="button" data-wallet="DANA">Top Up DANA →</button>
+      </article>
+
+      <article class="product-card wallet-card">
+        <div class="product-icon">🟣</div>
+        <h3>OVO</h3>
+        <p>Top up saldo OVO.</p>
+        <button class="product-button ewallet-button" type="button" data-wallet="OVO">Top Up OVO →</button>
+      </article>
+
+      <article class="product-card wallet-card">
+        <div class="product-icon">🟢</div>
+        <h3>GoPay</h3>
+        <p>Top up saldo GoPay.</p>
+        <button class="product-button ewallet-button" type="button" data-wallet="GoPay">Top Up GoPay →</button>
+      </article>
+    </div>
+    <p class="section-note">Biaya admin E-Wallet: Rp3.000 per pesanan. Periksa kembali detail pesanan sebelum melanjutkan.</p>
+  </section>
+
+  <section class="section feature-section" id="promo">
+    <div class="section-title">
+      <p class="eyebrow">INFO HNDSTORE</p>
+      <h2>Promo & Diskon</h2>
+      <p>Informasi promo akan ditampilkan di sini saat tersedia.</p>
+    </div>
+    <div class="info-card">
+      <div class="info-card-icon">🎁</div>
+      <div>
+        <h3>Promo berikutnya segera hadir</h3>
+        <p>Saat ini belum ada promo aktif yang dikonfirmasi. Jangan menganggap harga atau diskon tertentu berlaku sebelum diumumkan.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section feature-section" id="cek-pesanan">
+    <div class="section-title">
+      <p class="eyebrow">STATUS TRANSAKSI</p>
+      <h2>Cek Pesanan</h2>
+      <p>Masukkan invoice E-Wallet yang tersimpan di perangkat ini.</p>
+    </div>
+    <form class="lookup-form" id="orderLookupForm">
+      <label for="orderInvoice">Nomor invoice</label>
+      <div class="lookup-row">
+        <input id="orderInvoice" type="text" placeholder="Contoh: HND-EW-..." autocomplete="off" required>
+        <button class="button" type="submit">Cari Pesanan</button>
+      </div>
+    </form>
+    <div id="orderLookupResult" class="result-panel" aria-live="polite">
+      <p class="muted">Hasil pencarian pesanan akan muncul di sini.</p>
+    </div>
+    <p class="section-note">Versi ini belum memakai database online. Invoice hanya dapat ditemukan jika tersimpan di browser/perangkat yang sama.</p>
+  </section>
+
+  <section class="section feature-section" id="riwayat">
+    <div class="section-title">
+      <p class="eyebrow">AKTIVITAS LOKAL</p>
+      <h2>Riwayat Transaksi</h2>
+      <p>Daftar transaksi E-Wallet yang tercatat pada perangkat ini.</p>
+    </div>
+    <div id="historyList" class="history-list">
+      <div class="empty-state">
+        <span>🕘</span>
+        <p>Belum ada riwayat E-Wallet di perangkat ini.</p>
+      </div>
+    </div>
+    <button class="text-button" id="clearHistoryButton" type="button">Hapus riwayat lokal</button>
+  </section>
+
+  <section class="section feature-section" id="faq">
+    <div class="section-title">
+      <p class="eyebrow">PUSAT BANTUAN</p>
+      <h2>FAQ</h2>
+      <p>Jawaban untuk beberapa pertanyaan umum.</p>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>Bagaimana cara top up game?</summary>
+        <p>Pilih Mobile Legends atau Free Fire, buka halaman produk, pilih produk yang tersedia, isi data yang diminta, lalu ikuti alur checkout.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Bagaimana cara top up E-Wallet?</summary>
+        <p>Pilih DANA, OVO, atau GoPay. Masukkan nomor dan nominal. Periksa total termasuk biaya admin Rp3.000 sebelum melanjutkan.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Apakah pesanan otomatis dibayar?</summary>
+        <p>Tidak. Menyimpan data pesanan di browser bukan bukti pembayaran dan bukan bukti saldo sudah dikirim. Ikuti instruksi admin dan konfirmasi pembayaran secara langsung.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Kenapa riwayat tidak muncul di perangkat lain?</summary>
+        <p>Riwayat versi ini disimpan secara lokal pada browser yang digunakan. Sinkronisasi lintas perangkat membutuhkan backend/database.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Bagaimana jika salah memasukkan ID game atau nomor?</summary>
+        <p>Periksa kembali data sebelum melanjutkan. Jika pesanan sudah dikirim ke admin, segera hubungi admin untuk menanyakan kemungkinan perbaikan.</p>
+      </details>
+    </div>
+  </section>
+
+  <section class="section feature-section" id="tentang">
+    <div class="section-title">
+      <p class="eyebrow">KENALAN DENGAN KAMI</p>
+      <h2>Tentang HNDStore</h2>
+    </div>
+    <div class="info-card about-card">
+      <div class="info-card-icon">💙</div>
+      <div>
+        <h3>HNDStore</h3>
+        <p>HNDStore adalah proyek toko top up game dan E-Wallet dengan tampilan bertema biru futuristik. Kami ingin membuat alur pemesanan yang mudah dipahami dan detail pesanan yang jelas.</p>
+        <p class="section-note">Ketersediaan produk, proses pembayaran, dan pengiriman tetap perlu dikonfirmasi kepada admin HNDStore.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section feature-section" id="legal">
+    <div class="section-title">
+      <p class="eyebrow">INFORMASI PENTING</p>
+      <h2>Syarat & Kebijakan</h2>
+    </div>
+    <div class="legal-grid">
+      <article class="legal-card">
+        <h3>📋 Syarat & Ketentuan</h3>
+        <ul>
+          <li>Periksa kembali ID game, Zone ID, nomor HP, nominal, dan total sebelum mengirim pesanan.</li>
+          <li>Jangan mengirim kata sandi akun game atau kode OTP kepada siapa pun.</li>
+          <li>Data pesanan yang tersimpan di browser belum berarti transaksi berhasil.</li>
+          <li>Konfirmasikan status pembayaran dan pengiriman kepada admin.</li>
+        </ul>
+      </article>
+      <article class="legal-card">
+        <h3>🛡️ Kebijakan Privasi</h3>
+        <ul>
+          <li>Data form disimpan secara lokal pada browser melalui localStorage untuk kebutuhan alur pesanan.</li>
+          <li>Orang yang memiliki akses ke perangkat atau browser tersebut mungkin dapat melihat data lokal.</li>
+          <li>Jangan menggunakan perangkat bersama untuk menyimpan data sensitif.</li>
+          <li>Versi ini belum menyediakan sistem akun, database server, atau sinkronisasi online.</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <a class="logo" href="#home">HND<span>Store</span></a>
+  <p>Top up game dan E-Wallet.</p>
+  <div class="footer-links">
+    <a href="#faq">Bantuan</a>
+    <a href="#tentang">Tentang</a>
+    <a href="#legal">Syarat & Privasi</a>
+  </div>
+  <small>© 2026 HNDStore. All rights reserved.</small>
+</footer>
+
+<!-- MODAL E-WALLET -->
+<div class="ewallet-modal" id="ewalletModal" aria-hidden="true">
+  <div class="ewallet-box" role="dialog" aria-modal="true" aria-labelledby="selectedWallet">
+    <button class="ewallet-close" id="closeEwalletModal" type="button" aria-label="Tutup">×</button>
+    <div class="ewallet-header">
+      <p class="ewallet-label">TOP UP E-WALLET</p>
+      <h2 id="selectedWallet">Top Up E-Wallet</h2>
+      <p class="ewallet-subtitle">Masukkan nomor dan pilih nominal saldo yang ingin kamu top up.</p>
+    </div>
+
+    <div class="ewallet-form">
+      <div class="ewallet-wallet-info">
+        <div class="ewallet-wallet-icon" id="walletIcon">💳</div>
+        <div class="ewallet-wallet-text">
+          <strong id="walletName">E-Wallet</strong>
+          <span>Periksa nomor penerima sebelum melanjutkan.</span>
+        </div>
+      </div>
+
+      <div class="ewallet-field">
+        <label for="ewalletNumber">Nomor E-Wallet</label>
+        <input type="tel" id="ewalletNumber" placeholder="08xxxxxxxxxx" inputmode="numeric" autocomplete="off" maxlength="16">
+      </div>
+
+      <div class="ewallet-field">
+        <label for="ewalletAmount">Nominal Saldo</label>
+        <select id="ewalletAmount">
+          <option value="">Pilih nominal</option>
+          <option value="10000">Rp10.000</option>
+          <option value="20000">Rp20.000</option>
+          <option value="25000">Rp25.000</option>
+          <option value="50000">Rp50.000</option>
+          <option value="75000">Rp75.000</option>
+          <option value="100000">Rp100.000</option>
+          <option value="150000">Rp150.000</option>
+          <option value="200000">Rp200.000</option>
+          <option value="250000">Rp250.000</option>
+          <option value="500000">Rp500.000</option>
+        </select>
+      </div>
+
+      <div class="ewallet-summary">
+        <div class="ewallet-summary-title">Ringkasan Pesanan</div>
+        <div class="ewallet-summary-row"><span>Saldo</span><strong id="saldoPrice">Rp0</strong></div>
+        <div class="ewallet-summary-row"><span>Biaya Admin</span><strong>Rp3.000</strong></div>
+        <div class="ewallet-summary-row ewallet-total"><span>Total Bayar</span><strong id="totalPrice">Rp3.000</strong></div>
+      </div>
+
+      <p class="ewallet-note"><span>💵</span><span>Pembayaran cash kepada admin. Pesanan yang tercatat di browser bukan bukti pembayaran atau pengiriman saldo.</span></p>
+      <p class="ewallet-error" id="ewalletError" aria-live="polite"></p>
+      <button class="ewallet-submit" id="continueEwallet" type="button">Buat Pesanan →</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL RINGKASAN PESANAN -->
+<div class="payment-modal" id="ewalletResultModal" aria-hidden="true">
+  <div class="payment-modal-box" role="dialog" aria-modal="true" aria-labelledby="ewalletResultTitle">
+    <button class="ewallet-close" id="closeEwalletResult" type="button" aria-label="Tutup">×</button>
+    <div class="success-icon">✓</div>
+    <p class="eyebrow">PESANAN TERCATAT LOKAL</p>
+    <h2 id="ewalletResultTitle">Detail Pesanan</h2>
+    <p class="payment-modal-text">Simpan nomor invoice ini. Pesanan belum berarti sudah dibayar atau saldo sudah dikirim.</p>
+    <div class="payment-summary">
+      <div><span>Invoice</span><strong id="ewalletInvoiceOutput">-</strong></div>
+      <div><span>E-Wallet</span><strong id="ewalletNameOutput">-</strong></div>
+      <div><span>Nominal</span><strong id="ewalletAmountOutput">-</strong></div>
+      <div><span>Total</span><strong id="ewalletTotalOutput">-</strong></div>
+    </div>
+    <button class="pay-button" id="copyInvoiceButton" type="button">Salin Invoice</button>
+    <button class="receipt-home" id="finishEwalletButton" type="button">Selesai</button>
+  </div>
+</div>
+
+<div class="toast" id="siteToast" role="status" aria-live="polite"></div>
+
+</body>
+</html>

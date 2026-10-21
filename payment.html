@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+    <title>Pembayaran - HNDStore</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="logo">
+            HND<span>Store</span>
+        </div>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="ml.html">Produk</a>
+        </nav>
+
+        <button
+            class="cart-button"
+            type="button"
+        >
+            🛒
+        </button>
+
+    </header>
+
+    <main>
+
+        <section class="checkout-section">
+
+            <div class="checkout-box">
+
+                <div class="section-title">
+
+                    <p class="eyebrow">
+                        PEMBAYARAN
+                    </p>
+
+                    <h2>
+                        Selesaikan Pembayaran
+                    </h2>
+
+                </div>
+
+                <div class="selected-payment">
+
+                    <span id="paymentIcon">
+                        💳
+                    </span>
+
+                    <div>
+
+                        <strong id="paymentMethod">
+                            -
+                        </strong>
+
+                        <small id="paymentSubtitle">
+                            Metode pembayaran dipilih
+                        </small>
+
+                    </div>
+
+                </div>
+
+                <div class="checkout-divider"></div>
+
+                <div class="checkout-info">
+
+                    <div class="info-row">
+
+                        <span>
+                            Produk
+                        </span>
+
+                        <strong id="product">
+                            -
+                        </strong>
+
+                    </div>
+
+                    <div class="info-row">
+
+                        <span>
+                            User ID
+                        </span>
+
+                        <strong id="userId">
+                            -
+                        </strong>
+
+                    </div>
+
+                    <div class="info-row">
+
+                        <span>
+                            Zone ID
+                        </span>
+
+                        <strong id="zoneId">
+                            -
+                        </strong>
+
+                    </div>
+
+                </div>
+
+                <div class="checkout-divider"></div>
+
+                <div
+                    class="payment-instruction"
+                    id="paymentContent"
+                >
+
+                    <p class="checkout-label">
+                        TOTAL PEMBAYARAN
+                    </p>
+
+                    <h2
+                        class="payment-total"
+                        id="total"
+                    >
+                        -
+                    </h2>
+
+                    <div
+                        id="qrisPayment"
+                        style="display: none;"
+                    >
+
+                        <div class="payment-visual">
+
+                            <div class="payment-glow">
+                                📱
+                            </div>
+
+                        </div>
+
+                        <h3>
+                            Pembayaran QRIS
+                        </h3>
+
+                        <p class="payment-note">
+                            QRIS HNDStore akan tersedia
+                            di sini.
+                        </p>
+
+                        <p class="payment-note">
+                            Silakan gunakan metode E-Wallet
+                            sementara waktu.
+                        </p>
+
+                    </div>
+
+                    <div
+                        id="ewalletPayment"
+                        style="display: none;"
+                    >
+
+                        <p class="checkout-label">
+                            PILIH E-WALLET
+                        </p>
+
+                        <div class="payment-options">
+
+                            <button
+                                class="payment-option wallet-option"
+                                type="button"
+                                data-wallet="DANA"
+                            >
+
+                                <span>
+                                    💙
+                                </span>
+
+                                <div>
+
+                                    <strong>
+                                        DANA
+                                    </strong>
+
+                                    <small>
+                                        Pembayaran melalui DANA
+                                    </small>
+
+                                </div>
+
+                            </button>
+
+                            <button
+                                class="payment-option wallet-option"
+                                type="button"
+                                data-wallet="GoPay"
+                            >
+
+                                <span>
+                                    💚
+                                </span>
+
+                                <div>
+
+                                    <strong>
+                                        GoPay
+                                    </strong>
+
+                                    <small>
+                                        Pembayaran melalui GoPay
+                                    </small>
+
+                                </div>
+
+                            </button>
+
+                            <button
+                                class="payment-option wallet-option"
+                                type="button"
+                                data-wallet="OVO"
+                            >
+
+                                <span>
+                                    🟣
+                                </span>
+
+                                <div>
+
+                                    <strong>
+                                        OVO
+                                    </strong>
+
+                                    <small>
+                                        Pembayaran melalui OVO
+                                    </small>
+
+                                </div>
+
+                            </button>
+
+                        </div>
+
+                        <div
+                            id="walletDetail"
+                            style="display: none;"
+                        >
+
+                            <div class="checkout-divider"></div>
+
+                            <p class="checkout-label">
+                                NOMOR PEMBAYARAN
+                            </p>
+
+                            <h2 id="walletNumber">
+                                085697213657
+                            </h2>
+
+                            <p class="payment-note">
+                                Transfer sesuai nominal
+                                pembayaran di atas.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <button
+                    class="pay-button"
+                    id="paidButton"
+                    type="button"
+                >
+                    Saya Sudah Bayar →
+                </button>
+
+                <p
+                    class="payment-message"
+                    id="paymentMessage"
+                ></p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+
+        <p>
+            © 2026 HNDStore. All rights reserved.
+        </p>
+
+    </footer>
+
+    <div
+        class="payment-modal"
+        id="warningModal"
+    >
+
+        <div class="payment-modal-box">
+
+            <div class="success-icon">
+                !
+            </div>
+
+            <h2 id="warningTitle">
+                Pilih Pembayaran
+            </h2>
+
+            <p
+                class="payment-modal-text"
+                id="warningText"
+            >
+                Silakan pilih metode pembayaran
+                terlebih dahulu sebelum melanjutkan.
+            </p>
+
+            <button
+                class="pay-button"
+                id="closeWarning"
+                type="button"
+            >
+                Mengerti
+            </button>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                const checkoutRaw =
+                    localStorage.getItem(
+                        "hndCheckout"
+                    );
+
+                const savedPayment =
+                    localStorage.getItem(
+                        "hndPaymentMethod"
+                    );
+
+                const productElement =
+                    document.getElementById(
+                        "product"
+                    );
+
+                const userIdElement =
+                    document.getElementById(
+                        "userId"
+                    );
+
+                const zoneIdElement =
+                    document.getElementById(
+                        "zoneId"
+                    );
+
+                const totalElement =
+                    document.getElementById(
+                        "total"
+                    );
+
+                const paymentMethodElement =
+                    document.getElementById(
+                        "paymentMethod"
+                    );
+
+                const paymentIcon =
+                    document.getElementById(
+                        "paymentIcon"
+                    );
+
+                const paymentSubtitle =
+                    document.getElementById(
+                        "paymentSubtitle"
+                    );
+
+                const qrisPayment =
+                    document.getElementById(
+                        "qrisPayment"
+                    );
+
+                const ewalletPayment =
+                    document.getElementById(
+                        "ewalletPayment"
+                    );
+
+                const walletOptions =
+                    document.querySelectorAll(
+                        ".wallet-option"
+                    );
+
+                const walletDetail =
+                    document.getElementById(
+                        "walletDetail"
+                    );
+
+                const paidButton =
+                    document.getElementById(
+                        "paidButton"
+                    );
+
+                const paymentMessage =
+                    document.getElementById(
+                        "paymentMessage"
+                    );
+
+                const warningModal =
+                    document.getElementById(
+                        "warningModal"
+                    );
+
+                const warningTitle =
+                    document.getElementById(
+                        "warningTitle"
+                    );
+
+                const warningText =
+                    document.getElementById(
+                        "warningText"
+                    );
+
+                const closeWarning =
+                    document.getElementById(
+                        "closeWarning"
+                    );
+
+                if (
+                    !checkoutRaw ||
+                    !savedPayment
+                ) {
+
+                    paymentMessage.textContent =
+                        "Data pembayaran tidak ditemukan. Silakan ulangi pesanan.";
+
+                    paidButton.disabled =
+                        true;
+
+                    return;
+
+                }
+
+                let data;
+
+                try {
+
+                    data =
+                        JSON.parse(
+                            checkoutRaw
+                        );
+
+                } catch (error) {
+
+                    paymentMessage.textContent =
+                        "Data pesanan tidak valid. Silakan ulangi pesanan.";
+
+                    paidButton.disabled =
+                        true;
+
+                    return;
+
+                }
+
+                productElement.textContent =
+                    data.product || "-";
+
+                userIdElement.textContent =
+                    data.userId || "-";
+
+                zoneIdElement.textContent =
+                    data.zoneId || "-";
+
+                totalElement.textContent =
+                    data.price || "-";
+
+                let selectedWallet = "";
+
+                if (
+                    savedPayment === "QRIS"
+                ) {
+
+                    paymentMethodElement.textContent =
+                        "QRIS";
+
+                    paymentIcon.textContent =
+                        "📱";
+
+                    paymentSubtitle.textContent =
+                        "Pembayaran melalui QRIS";
+
+                    qrisPayment.style.display =
+                        "block";
+
+                    ewalletPayment.style.display =
+                        "none";
+
+                } else {
+
+                    paymentMethodElement.textContent =
+                        "E-Wallet";
+
+                    paymentIcon.textContent =
+                        "💳";
+
+                    paymentSubtitle.textContent =
+                        "Pilih DANA, GoPay, atau OVO";
+
+                    qrisPayment.style.display =
+                        "none";
+
+                    ewalletPayment.style.display =
+                        "block";
+
+                }
+
+                walletOptions.forEach(
+                    function (option) {
+
+                        option.addEventListener(
+                            "click",
+                            function () {
+
+                                walletOptions.forEach(
+                                    function (item) {
+
+                                        item.classList.remove(
+                                            "selected"
+                                        );
+
+                                    }
+                                );
+
+                                option.classList.add(
+                                    "selected"
+                                );
+
+                                selectedWallet =
+                                    option.dataset.wallet;
+
+                                walletDetail.style.display =
+                                    "block";
+
+                                paymentMethodElement.textContent =
+                                    selectedWallet;
+
+                                paymentIcon.textContent =
+                                    selectedWallet === "DANA"
+                                        ? "💙"
+                                        : selectedWallet === "GoPay"
+                                            ? "💚"
+                                            : "🟣";
+
+                                paymentSubtitle.textContent =
+                                    "Transfer ke nomor HNDStore";
+
+                                paymentMessage.textContent =
+                                    "";
+
+                            }
+                        );
+
+                    }
+                );
+
+                closeWarning.addEventListener(
+                    "click",
+                    function () {
+
+                        warningModal.classList.remove(
+                            "show"
+                        );
+
+                    }
+                );
+
+                warningModal.addEventListener(
+                    "click",
+                    function (event) {
+
+                        if (
+                            event.target ===
+                            warningModal
+                        ) {
+
+                            warningModal.classList.remove(
+                                "show"
+                            );
+
+                        }
+
+                    }
+                );
+
+                paidButton.addEventListener(
+                    "click",
+                    function () {
+
+                        if (
+                            savedPayment === "QRIS"
+                        ) {
+
+                            warningTitle.textContent =
+                                "QRIS Belum Tersedia";
+
+                            warningText.textContent =
+                                "QRIS HNDStore belum tersedia. Silakan gunakan DANA, GoPay, atau OVO.";
+
+                            warningModal.classList.add(
+                                "show"
+                            );
+
+                            return;
+
+                        }
+
+                        if (
+                            selectedWallet === ""
+                        ) {
+
+                            warningTitle.textContent =
+                                "Pilih E-Wallet";
+
+                            warningText.textContent =
+                                "Silakan pilih DANA, GoPay, atau OVO terlebih dahulu.";
+
+                            warningModal.classList.add(
+                                "show"
+                            );
+
+                            return;
+
+                        }
+
+                        localStorage.setItem(
+                            "hndPaymentMethod",
+                            selectedWallet
+                        );
+
+                        localStorage.setItem(
+                            "hndPaymentNumber",
+                            "085697213657"
+                        );
+
+                        window.location.href =
+                            "success.html";
+
+                    }
+                );
+
+            }
+        );
+
+    </script>
+
+</body>
+</html>

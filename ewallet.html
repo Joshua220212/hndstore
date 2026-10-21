@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Top Up E-Wallet - HNDStore</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <header class="navbar">
+
+        <div class="logo">
+            HND<span>Store</span>
+        </div>
+
+
+        <nav>
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="#ewallet">
+                E-Wallet
+            </a>
+
+        </nav>
+
+
+        <button
+            class="cart-button"
+            type="button"
+        >
+            🛒
+        </button>
+
+    </header>
+
+
+
+    <main>
+
+
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <p class="eyebrow">
+                    TOP UP E-WALLET
+                </p>
+
+
+                <h1>
+                    Isi Saldo
+                    <span>E-Wallet.</span>
+                </h1>
+
+
+                <p class="hero-description">
+                    Top up DANA, OVO, dan GoPay
+                    dengan mudah melalui HNDStore.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <section
+            class="products"
+            id="ewallet"
+        >
+
+
+            <div class="section-title">
+
+                <p class="eyebrow">
+                    E-WALLET
+                </p>
+
+
+                <h2>
+                    Pilih E-Wallet
+                </h2>
+
+            </div>
+
+
+
+            <div class="product-grid">
+
+
+                <!-- DANA -->
+
+                <div class="product-card">
+
+                    <div class="product-icon">
+                        💙
+                    </div>
+
+
+                    <h3>
+                        DANA
+                    </h3>
+
+
+                    <p>
+                        Top Up Saldo DANA
+                    </p>
+
+
+                    <button
+                        class="product-button ewallet-button"
+                        type="button"
+                        data-wallet="DANA"
+                    >
+                        Pilih DANA
+                    </button>
+
+                </div>
+
+
+
+                <!-- OVO -->
+
+                <div class="product-card">
+
+                    <div class="product-icon">
+                        🟣
+                    </div>
+
+
+                    <h3>
+                        OVO
+                    </h3>
+
+
+                    <p>
+                        Top Up Saldo OVO
+                    </p>
+
+
+                    <button
+                        class="product-button ewallet-button"
+                        type="button"
+                        data-wallet="OVO"
+                    >
+                        Pilih OVO
+                    </button>
+
+                </div>
+
+
+
+                <!-- GOPAY -->
+
+                <div class="product-card">
+
+                    <div class="product-icon">
+                        🟢
+                    </div>
+
+
+                    <h3>
+                        GoPay
+                    </h3>
+
+
+                    <p>
+                        Top Up Saldo GoPay
+                    </p>
+
+
+                    <button
+                        class="product-button ewallet-button"
+                        type="button"
+                        data-wallet="GoPay"
+                    >
+                        Pilih GoPay
+                    </button>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- MODAL E-WALLET -->
+
+    <div
+        class="payment-modal"
+        id="ewalletModal"
+    >
+
+
+        <div class="payment-modal-content">
+
+
+            <button
+                class="payment-modal-close"
+                id="closeEwalletModal"
+                type="button"
+            >
+                ×
+            </button>
+
+
+
+            <p class="eyebrow">
+                TOP UP E-WALLET
+            </p>
+
+
+            <h2 id="selectedWallet">
+                Top Up E-Wallet
+            </h2>
+
+
+
+            <!-- NOMOR E-WALLET -->
+
+            <div class="form-group">
+
+                <label for="ewalletNumber">
+                    Nomor E-Wallet
+                </label>
+
+
+                <input
+                    type="tel"
+                    id="ewalletNumber"
+                    placeholder="08xxxxxxxxxx"
+                    inputmode="numeric"
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+
+            <!-- NOMINAL -->
+
+            <div class="form-group">
+
+                <label for="ewalletAmount">
+                    Nominal Saldo
+                </label>
+
+
+                <select id="ewalletAmount">
+
+                    <option value="">
+                        Pilih Nominal
+                    </option>
+
+                    <option value="10000">
+                        Rp10.000
+                    </option>
+
+                    <option value="20000">
+                        Rp20.000
+                    </option>
+
+                    <option value="25000">
+                        Rp25.000
+                    </option>
+
+                    <option value="50000">
+                        Rp50.000
+                    </option>
+
+                    <option value="75000">
+                        Rp75.000
+                    </option>
+
+                    <option value="100000">
+                        Rp100.000
+                    </option>
+
+                    <option value="150000">
+                        Rp150.000
+                    </option>
+
+                    <option value="200000">
+                        Rp200.000
+                    </option>
+
+                    <option value="250000">
+                        Rp250.000
+                    </option>
+
+                    <option value="500000">
+                        Rp500.000
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- RINGKASAN -->
+
+            <div class="order-summary">
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Saldo
+                    </span>
+
+
+                    <strong id="saldoPrice">
+                        Rp0
+                    </strong>
+
+                </div>
+
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Biaya Admin
+                    </span>
+
+
+                    <strong>
+                        Rp3.000
+                    </strong>
+
+                </div>
+
+
+
+                <div class="summary-row total">
+
+                    <span>
+                        Total
+                    </span>
+
+
+                    <strong id="totalPrice">
+                        Rp3.000
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+
+            <button
+                class="button"
+                id="continueEwallet"
+                type="button"
+            >
+                Lanjutkan →
+            </button>
+
+
+
+            <p class="payment-note">
+                💵 Pembayaran dilakukan secara cash
+                kepada admin HNDStore.
+            </p>
+
+
+        </div>
+
+    </div>
+
+
+
+    <footer>
+
+        <p>
+            © 2026 HNDStore. All rights reserved.
+        </p>
+
+    </footer>
+
+
+
+    <script>
+
+
+        const walletButtons =
+            document.querySelectorAll(
+                ".ewallet-button"
+            );
+
+
+        const modal =
+            document.getElementById(
+                "ewalletModal"
+            );
+
+
+        const closeModal =
+            document.getElementById(
+                "closeEwalletModal"
+            );
+
+
+        const selectedWallet =
+            document.getElementById(
+                "selectedWallet"
+            );
+
+
+        const ewalletNumber =
+            document.getElementById(
+                "ewalletNumber"
+            );
+
+
+        const ewalletAmount =
+            document.getElementById(
+                "ewalletAmount"
+            );
+
+
+        const saldoPrice =
+            document.getElementById(
+                "saldoPrice"
+            );
+
+
+        const totalPrice =
+            document.getElementById(
+                "totalPrice"
+            );
+
+
+        const continueButton =
+            document.getElementById(
+                "continueEwallet"
+            );
+
+
+
+        let currentWallet = "";
+
+
+
+        walletButtons.forEach(
+            function(button) {
+
+                button.addEventListener(
+                    "click",
+                    function() {
+
+                        currentWallet =
+                            button.getAttribute(
+                                "data-wallet"
+                            );
+
+                        selectedWallet.textContent =
+                            "Top Up " +
+                            currentWallet;
+
+                        modal.classList.add(
+                            "show"
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+
+        closeModal.addEventListener(
+            "click",
+            function() {
+
+                modal.classList.remove(
+                    "show"
+                );
+
+            }
+        );
+
+
+
+        modal.addEventListener(
+            "click",
+            function(event) {
+
+                if (
+                    event.target === modal
+                ) {
+
+                    modal.classList.remove(
+                        "show"
+                    );
+
+                }
+
+            }
+        );
+
+
+
+        ewalletAmount.addEventListener(
+            "change",
+            function() {
+
+                const amount =
+                    parseInt(
+                        ewalletAmount.value,
+                        10
+                    ) || 0;
+
+
+                const admin = 3000;
+
+
+                saldoPrice.textContent =
+                    "Rp" +
+                    new Intl.NumberFormat(
+                        "id-ID"
+                    ).format(
+                        amount
+                    );
+
+
+                totalPrice.textContent =
+                    "Rp" +
+                    new Intl.NumberFormat(
+                        "id-ID"
+                    ).format(
+                        amount + admin
+                    );
+
+            }
+        );
+
+
+
+        continueButton.addEventListener(
+            "click",
+            function() {
+
+
+                const phoneNumber =
+                    ewalletNumber.value
+                        .replace(
+                            /\D/g,
+                            ""
+                        );
+
+
+                const amount =
+                    parseInt(
+                        ewalletAmount.value,
+                        10
+                    ) || 0;
+
+
+
+                if (
+                    currentWallet === ""
+                ) {
+
+                    alert(
+                        "Pilih E-Wallet terlebih dahulu."
+                    );
+
+                    return;
+
+                }
+
+
+
+                if (
+                    phoneNumber === ""
+                ) {
+
+                    alert(
+                        "Masukkan nomor E-Wallet terlebih dahulu."
+                    );
+
+                    return;
+
+                }
+
+
+
+                if (
+                    phoneNumber.length < 10
+                ) {
+
+                    alert(
+                        "Nomor E-Wallet tidak valid."
+                    );
+
+                    return;
+
+                }
+
+
+
+                if (
+                    amount === 0
+                ) {
+
+                    alert(
+                        "Pilih nominal saldo terlebih dahulu."
+                    );
+
+                    return;
+
+                }
+
+
+
+                const admin = 3000;
+
+
+                const checkoutData = {
+
+                    type: "ewallet",
+
+                    wallet: currentWallet,
+
+                    number: phoneNumber,
+
+                    amount: amount,
+
+                    admin: admin,
+
+                    total: amount + admin
+
+                };
+
+
+
+                localStorage.setItem(
+                    "hndEwallet",
+                    JSON.stringify(
+                        checkoutData
+                    )
+                );
+
+
+
+                alert(
+                    "Pesanan berhasil dibuat! Pembayaran dilakukan secara cash kepada admin HNDStore."
+                );
+
+
+            }
+        );
+
+
+    </script>
+
+
+</body>
+
+</html>
+
+Nah ini langsung replace seluruh isi "ewallet.html" lu dengan yang di atas. 😎
+
+Untuk sekarang alurnya memang baru:
+
+Pilih DANA/OVO/GoPay → nomor → nominal → otomatis hitung admin Rp3.000 → Lanjutkan → data pesanan tersimpan.
+
+Nanti tahap berikutnya baru kita bikin halaman konfirmasi + invoice khusus E-Wallet, supaya nggak nyampur dengan flow pembayaran ML/FF. 🔥
